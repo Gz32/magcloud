@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: mag-zuul
+
+server:
+  port: 8760
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+zuul:
+  routes:
+    ribbon:
+      path: /ribbon/**
+      serviceId: mag-consumer  # 转发到消费者 /ribbon/
+    feign:
+      path: /feign/**
+      serviceId: mag-consumer  # 转发到消费者 /feign/

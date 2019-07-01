@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: mag-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lower-case-service-id: true
+      routes:
+      - id: eureka-hi
+        uri: lb://EUREKA-HI
+        predicates:
+          - Path=/demo/**
+        filters:
+          - StripPrefix=1
+          - RequestTime=true
+
+server:
+  port: 8764
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
